@@ -17,7 +17,7 @@ namespace L2_Algorithms_DataStructures
       Console.WriteLine(ExampleArray[0]);
       Console.WriteLine(ExampleArray[1]);
       Console.WriteLine(ExampleArray[2]); // what to expect here?
-
+           
       //Alternate forms of initialization
       string[] weekDays1 = new string[] { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
       string[] weekDays2 = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
@@ -32,11 +32,24 @@ namespace L2_Algorithms_DataStructures
 
       // What will this print?
       Console.WriteLine(Array2D[3, 1]);
+            
 
       // Exercise: Create a 2D array of strings - 4 rows and 3 columns
       // each row to contain related colors (e.g. "red", "orange", "brown")
-
+      string[,] arr = new string[4, 3] { { "red", "orange", "brown" }, { "red", "orange", "brown" }, { "red", "orange", "brown" }, { "red", "orange", "brown" } };
+      
       // Exercise: Print each row
+      int rowLength = arr.GetLength(0);
+      int colLength = arr.GetLength(1);
+
+      for (int i = 0; i < rowLength; i++)
+      {
+          for (int j = 0; j < colLength; j++)
+          {
+              Console.Write(string.Format("{0} ", arr[i, j]));
+          }
+          Console.WriteLine();
+      }
 
 
       // Hash tables/ Dictionaries
@@ -52,10 +65,19 @@ namespace L2_Algorithms_DataStructures
       openWith.Add("rtf", "wordpad.exe");
 
       // Why do get an error below? 
+      // The Add method throws an exception if the new key is
+      // already in the dictionary.
       //openWith.Add("rtf", "word.exe");
-      
-      // How can we fix the error?
 
+      // How can we fix the error?      
+      try
+      {
+          openWith.Add("rtf", "word.exe");
+      }
+      catch (ArgumentException)
+      {
+          Console.WriteLine("An element with Key = \"rtf\" already exists.");
+      }
 
 
       // The key is used to index values 
@@ -67,6 +89,8 @@ namespace L2_Algorithms_DataStructures
 
       // Delete item at key
       openWith.Remove("doc");
+
+      Console.ReadKey(true);
     }
   }
 }
